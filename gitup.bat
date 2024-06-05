@@ -11,11 +11,16 @@ if not exist .git (
 REM Add all changes to the staging area
 git add .
 
-REM Get the current date
-for /f "tokens=2 delims==" %%i in ('wmic os get localdatetime /value') do set datetime=%%i
-set commit_message=Commit on %datetime:~0,4%-%datetime:~4,2%-%datetime:~6,2%
+REM Check if a commit message was provided as an argument
+if "%1"=="" (
+    REM Get the current date
+    for /f "tokens=2 delims==" %%i in ('wmic os get localdatetime /value') do set datetime=%%i
+    set commit_message=Commit on %datetime:~0,4%-%datetime:~4,2%-%datetime:~6,2%
+) else (
+    set commit_message=%1
+)
 
-REM Commit the changes with the current date
+REM Commit the changes with the appropriate message
 git commit -m "%commit_message%"
 
 REM Push the changes to the remote repository

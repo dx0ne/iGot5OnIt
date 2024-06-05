@@ -78,7 +78,7 @@ function rollDice() {
         const roll = Math.floor(Math.random() * symbols.length);
         results.push({ symbol: symbols[roll], color: colors[roll] });
     }
-    document.getElementById('result').innerHTML = results.map((result, index) => 
+    document.getElementById('rollResult').innerHTML = results.map((result, index) => 
         `<span draggable="true" id="drag${index}" ondragstart="drag(event)" style="color: ${result.color};">${result.symbol}</span>`
     ).join('');
     isFirstDrop = true; // Reset the flag after each roll
@@ -133,7 +133,28 @@ function drop(event) {
             else{
                 //compute score
                 const score = computeScore();
-                //document.getElementById('score').innerHTML = '<span>Score: ' + score + '</span>';
+            // Create a popup element
+            const popup = document.createElement('div');
+            popup.id = 'popup';
+            popup.style.position = 'absolute';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.padding = '20px';
+            popup.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            popup.style.color = 'white';
+            popup.style.fontSize = '20px';
+            popup.style.textAlign = 'center';
+            popup.style.zIndex = '1000';
+            popup.innerText = `No more moves!`;
+
+            // Append the popup to the body
+            document.body.appendChild(popup);
+
+            // Remove the popup after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(popup);
+            }, 3000);
             }
         }
     }
@@ -151,7 +172,7 @@ function isAdjacent(coords1, coords2) {
 
 function revertFirstMove() {
     if (initialDraggedElement && initialDropTarget && isFirstDrop==false) {
-        document.getElementById('result').appendChild(initialDraggedElement);
+        document.getElementById('rollResult').appendChild(initialDraggedElement);
         initialDropTarget.innerHTML = ''; // Clear the initial drop target
         isFirstDrop = true; // Reset the flag
         firstDropCoords = null; // Clear the stored coordinates
@@ -188,9 +209,6 @@ function checkForPossibleMoves() {
         }
     }
 
-    if (!possibleMoves) {
-        alert('No more possible moves!');
-    }
     return possibleMoves;
 }
 
@@ -253,8 +271,8 @@ function computeScore() {
         colElement.textContent = colScore;
     }
 
-const bottomRightCell = document.getElementById(`drag_${gridRows - 1}_${gridCols - 1}`);
-bottomRightCell.textContent = score;
+    const bottomRightCell = document.getElementById(`drag_${gridRows - 1}_${gridCols - 1}`);
+    bottomRightCell.textContent = score;
 
     return score;
 }
