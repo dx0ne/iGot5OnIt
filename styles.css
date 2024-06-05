@@ -61,3 +61,7 @@
     justify-content: center; /* Optional: to center content horizontally */
     margin-top: 10px; /* Optional: space between grid and result bar */
 }
+
+.highlight {
+    border: 2px dashed #7df72b; /* Example style */
+}

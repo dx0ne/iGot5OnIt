@@ -117,12 +117,16 @@ function drop(event) {
         initialDraggedElement = draggedElement; // Store the initial dragged element
         initialDropTarget = dropTarget; // Store the initial drop target
         document.getElementById('revertButton').disabled = false; // Enable the revert button
+
+        // Highlight eligible cells
+        highlightEligibleCells(firstDropCoords);
     } else {
         // Check if the drop target is adjacent to the first drop coordinates
         if (isAdjacent(firstDropCoords, dropTargetCoords)) {
             dropTarget.appendChild(draggedElement);
             isFirstDrop = true;
             document.getElementById('revertButton').disabled = true; // Disable the revert button after the second drop
+            clearHighlight(); // Clear the highlight after the second drop
             if(checkForPossibleMoves()){
                 document.getElementById('rollButton').disabled = false; // Disable the revert button after the second drop
             }
@@ -253,4 +257,24 @@ const bottomRightCell = document.getElementById(`drag_${gridRows - 1}_${gridCols
 bottomRightCell.textContent = score;
 
     return score;
+}
+
+function highlightEligibleCells(coords) {
+    const cells = document.querySelectorAll('.grid-cell');
+    cells.forEach(cell => {
+        const cellCoords = extractCoordinates(cell.id);
+        if (cellCoords[0] === gridRows - 1 || cellCoords[1] === gridCols - 1) {
+            return; // Skip the last row and last column cells
+        }
+        if (isAdjacent(coords, cellCoords) && cell.children.length === 0) {
+            cell.classList.add('highlight');
+        }
+    });
+}
+
+function clearHighlight() {
+    const cells = document.querySelectorAll('.grid-cell.highlight');
+    cells.forEach(cell => {
+        cell.classList.remove('highlight');
+    });
 }
