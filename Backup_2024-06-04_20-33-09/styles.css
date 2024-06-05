@@ -1,0 +1,54 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 50px); /* 5 columns, each 50px wide */
+    grid-template-rows: repeat(5, 50px); /* 5 rows, each 50px high */
+}
+
+.grid-cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+#result {
+    display: flex;
+    height: 50px; /* Ensure it maintains the height */
+    align-items: center; /* Optional: to center content vertically */
+    justify-content: center; /* Optional: to center content horizontally */
+}
+
+#result span {
+    border: 1px solid black;
+    background-color: white; /* Optional: to make it visually distinct */
+    cursor: pointer;
+    margin: 0px;
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-bar {
+    height: 50px;
+    display: flex;
+    align-items: center; /* Optional: to center content vertically */
+    justify-content: center; /* Optional: to center content horizontally */
+    margin-top: 10px; /* Optional: space between grid and result bar */
+}

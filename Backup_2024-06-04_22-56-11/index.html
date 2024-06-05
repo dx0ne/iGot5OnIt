@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h1>Dice Roller</h1>
+    <button id="rollButton" onclick="rollDice()">Roll Dice</button>
+    <button id="revertButton" onclick="revertFirstMove()">Revert First Move</button>
+    <div class="container">
+        <p id="result" class="result-bar"></p>
+        <div class="grid">
+            <div id="grid" style="display: grid; grid-template-columns: repeat(6, 50px); grid-gap: 5px;">
+            </div>
+        </div>
+        <p id="score" class="score-bar"></p>
+        <button id="debugButton">Compute Score</button>
+        <div id="score"></div>
+    </div>
+</body>
+</html>
