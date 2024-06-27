@@ -79,7 +79,7 @@ function rollDice() {
         results.push({ symbol: symbols[roll], color: colors[roll] });
     }
     document.getElementById('rollResult').innerHTML = results.map((result, index) => 
-        `<span draggable="true" id="drag${index}" ondragstart="drag(event)" style="color: ${result.color};">${result.symbol}</span>`
+        `<span draggable="true" id="drag${index}" class="grid-cell" ondragstart="drag(event)" style="color: ${result.color};">${result.symbol}</span>`
     ).join('');
     isFirstDrop = true; // Reset the flag after each roll
     document.getElementById('revertButton').disabled = true; // Enable the revert button
@@ -112,6 +112,7 @@ function drop(event) {
     // Allow the first drop on any empty field
     if (isFirstDrop) {
         dropTarget.appendChild(draggedElement);
+ 
         isFirstDrop = false; // Reset the flag after the first drop
         firstDropCoords = dropTargetCoords; // Store the coordinates of the first drop
         initialDraggedElement = draggedElement; // Store the initial dragged element
@@ -158,6 +159,8 @@ function drop(event) {
             }
         }
     }
+
+    draggedElement.classList.add('droppedElement');
 }
 
 function extractCoordinates(id) {
@@ -173,12 +176,14 @@ function isAdjacent(coords1, coords2) {
 function revertFirstMove() {
     if (initialDraggedElement && initialDropTarget && isFirstDrop==false) {
         document.getElementById('rollResult').appendChild(initialDraggedElement);
+        initialDraggedElement.classList.remove('droppedElement');
         initialDropTarget.innerHTML = ''; // Clear the initial drop target
         isFirstDrop = true; // Reset the flag
         firstDropCoords = null; // Clear the stored coordinates
         initialDraggedElement = null; // Clear the stored dragged element
         initialDropTarget = null; // Clear the stored drop target
         document.getElementById('revertButton').disabled = true; // Enable the revert button
+        clearHighlight();
     }
 }
 

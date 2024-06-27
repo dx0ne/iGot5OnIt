@@ -11,10 +11,9 @@
     margin-bottom: 20px;
 }
 
-.grid {
+#grid {
     display: grid;
-    grid-template-columns: repeat(5, 50px); /* 5 columns, each 50px wide */
-    grid-template-rows: repeat(5, 50px); /* 5 rows, each 50px high */
+    grid-template-columns: repeat(6, 50px); grid-gap: 5px;
 }
 
 .grid-cell {
@@ -24,8 +23,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-size: 40px; /* Adjust font size to fill the cell */
     line-height: 50px; /* Ensure the symbol is vertically centered */
@@ -40,35 +37,20 @@
 
 #rollResult {
     display: flex;
-    height: 50px; /* Ensure it maintains the height */
-    align-items: center; /* Optional: to center content vertically */
     justify-content: center; /* Optional: to center content horizontally */
+    gap: 5px;
+    height: 50px;
 }
 
-#rollResult span {
-    border: 1px solid black;
-    background-color: white; /* Optional: to make it visually distinct */
-    cursor: pointer;
-    margin: 0px;
-    padding: 0; /* Remove padding to fit the cell */
-    width: 50px;
-    height: 50px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px; /* Adjust font size to fill the cell */
-    line-height: 50px; /* Ensure the symbol is vertically centered */
-}
-
-.rollResult-bar {
-    height: 50px;
-    display: flex;
-    align-items: center; /* Optional: to center content vertically */
-    justify-content: center; /* Optional: to center content horizontally */
-    margin: 10px; /* Optional: space between grid and result bar */
+#rollResult{
+    margin: 10px;
 }
 
 .highlight {
     border: 2px dashed #7df72b; /* Example style */
+}
+
+.droppedElement
+{
+    border: none;
 }
